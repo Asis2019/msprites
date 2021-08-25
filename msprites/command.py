@@ -1,6 +1,7 @@
 import shlex
-from subprocess import Popen
 from subprocess import PIPE
+from subprocess import Popen
+
 
 class Command:
 
@@ -11,7 +12,7 @@ class Command:
 
         errs = errs.decode().strip() if errs and isinstance(errs, bytes) else errs
         res = res.decode().strip() if res and isinstance(res, bytes) else res
-        return (res, errs)
+        return res, errs
 
     @staticmethod
     def execute(cmd):

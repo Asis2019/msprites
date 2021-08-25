@@ -1,4 +1,3 @@
-
 FFMPEG_THUMBNAIL_IMAGES = """
     ffmpeg -loglevel error -i {input} -vf fps={ips} -s {width}x{height} {output}
 """

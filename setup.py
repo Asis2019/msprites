@@ -5,15 +5,16 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="msprites",
-    version="1.0.0",
+    version="1.0.1",
     author="Dharmveer Baloda",
     author_email="dharmvrbaloda836@gmail.com",
-    description="Create thumbnail spritesheet from mp4 media files",
+    description="Create thumbnail sprite sheet from mp4 media files",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/baloda/msprites",
+    url="https://github.com/asis2019/msprites",
     project_urls={
-        "Bug Tracker": "https://github.com/baloda/msprites/issues",
+        "Original": "https://github.com/baloda/msprites",
+        "Bug Tracker": "https://github.com/asis2019/msprites/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",

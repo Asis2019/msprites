@@ -1,12 +1,12 @@
 import os
 import shutil
 import tempfile
-from msprites.command import Command
+
 from msprites import FFmpegThumbnails
-from msprites.settings import Settings
+from msprites.command import Command
 from msprites.constants import THUMBNAIL_SPRITESHEET
+from msprites.settings import Settings
 from msprites.webvtt import WebVTT
-from msprites.temp_file import TempFile
 
 
 class MontageSprites(Settings):
@@ -19,7 +19,7 @@ class MontageSprites(Settings):
         return os.path.join(self.dir.name, self.FILENAME_FORMAT.format(ext=self.EXT))
 
     def generate(self):
-        cmd  = THUMBNAIL_SPRITESHEET.format(
+        cmd = THUMBNAIL_SPRITESHEET.format(
             rows=self.ROWS,
             cols=self.COLS,
             width=self.WIDTH,
@@ -33,12 +33,11 @@ class MontageSprites(Settings):
         try:
             self.dir.cleanup()
             self.thumbs.cleanup()
-        except Exception:
+        except OSError:
             pass
 
     def count(self):
-        splist = os.listdir(self.dir.name)
-        return len(splist)
+        return len(os.listdir(self.dir.name))
 
     def to_webvtt(self, create_webvtt):
         if not create_webvtt:
@@ -47,9 +46,11 @@ class MontageSprites(Settings):
         webvtt.generate()
 
     def copy_to(self, copy_dest):
-        os.makedirs(copy_dest, exist_ok=True)
-        shutil.copytree(self.dir.name, copy_dest)
-
+        for file_name in os.listdir(self.dir.name):
+            source = self.dir.name + "/" + file_name
+            destination = copy_dest + "/" + file_name
+            if os.path.isfile(source):
+                shutil.copy(source, destination)
 
     @classmethod
     def from_media(cls, path, create_webvtt=True, copy_dest=None):

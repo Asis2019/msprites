@@ -1,9 +1,9 @@
 import os
 import tempfile
+
 from msprites.command import Command
-from msprites.settings import Settings
 from msprites.constants import FFMPEG_THUMBNAIL_IMAGES
-from msprites.temp_file import TempFile
+from msprites.settings import Settings
 
 
 class FFmpegThumbnails(Settings):
@@ -26,8 +26,7 @@ class FFmpegThumbnails(Settings):
         self.dir.cleanup()
 
     def count(self):
-        imlist = os.listdir(self.dir.name)
-        return len(imlist)
+        return len(os.listdir(self.dir.name))
 
     @classmethod
     def from_media(cls, path):
